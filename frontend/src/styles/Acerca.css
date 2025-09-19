@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f0f0f;
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  padding: 20px;
+  position: relative;
+}
+
+.logo-section {
+  position: absolute;
+  left: 20px;
+}
+
+.logo-navbar {
+  max-width: 90px;
+  height: auto;
+  object-fit: contain;
+}
+
+.acerca-title {
+  color: #00ffcc;
+  font-size: 2rem;
+}
+
+
+.acerca-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.intro {
+  max-width: 800px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.intro p {
+  margin-bottom: 15px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.feature {
+  flex: 1 1 280px;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+}
+
+.ceo-section {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.ceo-section img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.footer {
+  background-color: #1a1a1a;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.footer a {
+  color: #00ffcc;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+  .acerca-title {
+    font-size: 1.5rem;
+  }
+
+  .logo-navbar {
+    max-width: 70px;
+  }
+
+  .intro {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .acerca-title {
+    font-size: 1.3rem;
+  }
+
+  .logo-navbar {
+    max-width: 60px;
+  }
+
+  .intro {
+    font-size: 0.95rem;
+  }
+
+  .ceo-section img {
+    width: 120px;
+    height: 120px;
+  }
+}
+.acerca-title {
+  color: #00ffcc;
+  font-size: 2rem;
+  width: 100%;
+  text-align: center;
+}

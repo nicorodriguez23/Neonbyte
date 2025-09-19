@@ -1,0 +1,86 @@
+.pago-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #111;
+  color: #00fff7;
+  font-family: "Roboto", sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 247, 0.2);
+}
+
+.pago-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.pago-box {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #00fff7;
+}
+
+.pago-box p,
+.pago-box li {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+.pago-box hr {
+  border-color: #00fff7;
+  margin: 15px 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.botones-pago {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.botones-pago button {
+  background-color: #00fff7;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.botones-pago button:hover {
+  background-color: #00c2b4;
+}
+
+@media (max-width: 600px) {
+  .pago-container {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  .pago-box {
+    padding: 15px;
+  }
+
+  .botones-pago {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .botones-pago button {
+    width: 100%;
+  }
+
+  .pago-container h1 {
+    font-size: 1.5rem;
+  }
+}
