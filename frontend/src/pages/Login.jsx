@@ -1,75 +1,74 @@
-"use client"
-
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "../styles/Login.css"
-import api from "../services/api"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
+import api from "../services/api.js";
+import { guardarSesion } from "../utils/auth";
+import { showSuccess, showError } from "../utils/toast";
 
 const Login = ({ setUsuario }) => {
-  const navigate = useNavigate()
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
-
-  const [error, setError] = useState("")
-  const [mensaje, setMensaje] = useState("")
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cargando, setCargando] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setMensaje("")
+    e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setError("Todos los campos son obligatorios")
-      return
+    if (!email || !password) {
+      showError("Todos los campos son obligatorios");
+      return;
     }
+
+    setCargando(true);
 
     try {
-      const response = await api.post("/usuarios/login", formData)
-      const { token, usuario } = response.data
+      const { data } = await api.post("/usuarios/login", { email, password });
 
-      let usuarioFinal = usuario
+      const token = data?.token || data?.accessToken || null;
+      let usuarioFinal = data?.usuario ?? data?.user ?? null;
+
       if (!usuarioFinal && token) {
-        const payload = JSON.parse(atob(token.split(".")[1]))
-        usuarioFinal = {
-          nombre: payload.nombre || "Usuario",
-          rol: payload.rol || "cliente",
-          _id: payload._id || payload.id,
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          usuarioFinal = {
+            nombre: payload.nombre || payload.name || "NeonByter",
+            rol: payload.rol || payload.role || "cliente",
+            _id: payload._id || payload.id || payload.sub,
+          };
+        } catch (err) {
+          
+          usuarioFinal = { nombre: data?.nombre || "NeonByter", rol: "cliente" };
         }
       }
 
-      if (!usuarioFinal) {
-        throw new Error("No se pudo obtener la información del usuario.")
+      guardarSesion(token, usuarioFinal);
+
+      if (typeof setUsuario === "function") {
+        setUsuario(usuarioFinal);
       }
 
-      localStorage.setItem("token", token)
-      localStorage.setItem("usuario", JSON.stringify(usuarioFinal))
-      setUsuario(usuarioFinal)
+      const nombreParaMostrar = usuarioFinal?.nombre || "NeonByter";
+      showSuccess(`Bienvenido ${nombreParaMostrar} 🎮`);
 
-      setMensaje(`Bienvenido, ${usuarioFinal.nombre}! 🎮`)
       setTimeout(() => {
-        if (usuarioFinal.rol === "admin") {
-          navigate("/admin-productos")
+        if (usuarioFinal?.rol === "admin") {
+          navigate("/admin-productos");
         } else {
-          navigate("/")
+          navigate("/");
         }
-      }, 1500)
-
+      }, 1200);
     } catch (err) {
-      console.error("Error al iniciar sesión:", err)
-      setError(err?.response?.data?.mensaje || "Error al iniciar sesión")
+
+      const msg =
+        err?.response?.data?.mensaje ||
+        err?.response?.data?.message ||
+        "Usuario o contraseña incorrectos";
+      showError(msg);
+      console.error("Login error:", err);
+    } finally {
+      setCargando(false);
     }
-  }
+  };
 
   return (
     <div className="login-container">
@@ -80,8 +79,11 @@ const Login = ({ setUsuario }) => {
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            placeholder="correo@ejemplo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={cargando}
           />
         </div>
 
@@ -90,18 +92,20 @@ const Login = ({ setUsuario }) => {
           <input
             type="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            placeholder="Tu contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={cargando}
           />
         </div>
 
-        {error && <p className="error">{error}</p>}
-        {mensaje && <div className="toast-mensaje">{mensaje}</div>}
-
-        <button type="submit">Ingresar</button>
+        <button type="submit" disabled={cargando}>
+          {cargando ? "Cargando..." : "Ingresar"}
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

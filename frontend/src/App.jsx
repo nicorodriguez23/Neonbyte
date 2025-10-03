@@ -21,6 +21,9 @@ import Pago from "./pages/Pago"
 
 import "./styles/global.css"
 
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 function App() {
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem("carrito")
@@ -72,6 +75,19 @@ function App() {
       </Routes>
 
       <Footer />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </BrowserRouter>
   )
 }

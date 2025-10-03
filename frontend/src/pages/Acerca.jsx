@@ -45,7 +45,7 @@ export default function Acerca() {
           <img src={fotoCeo || "/placeholder.svg"} alt="Foto del CEO" />
           <h2>Nicolas Rodriguez</h2>
           <p>
-            Soy Nicolas Rodriguez, fundador y CEO. Me desarrollo como Full Stacker y mi pasión por el gaming y la
+            Soy Nicolas Rodriguez, fundador. Me desarrollo como Full Stacker y mi pasión por el gaming y la
             tecnología me llevaron a desarrollar NeonByte: una tienda donde encuentres todo lo que buscás para la mejor
             PC...
           </p>

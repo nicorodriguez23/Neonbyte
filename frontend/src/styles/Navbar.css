@@ -46,17 +46,28 @@
   flex-shrink: 0;
 }
 
+
 .avatar {
   height: 40px;
   width: 40px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid #00ffcc;
+  padding: 4px;
+  background-color: #0f0f0f; 
   transition: transform 0.2s ease;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar:hover {
   transform: scale(1.1);
+}
+
+.avatar:focus,
+.avatar:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 .cart-icon-container {
@@ -92,6 +103,8 @@
 
 .menu-usuario {
   position: relative;
+  background: transparent;
+  border: none;
 }
 
 .menu-usuario-contenido {
@@ -209,4 +222,18 @@
   .hamburguesa-icono {
     display: flex;
   }
+}
+
+
+.user-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.user-button:focus,
+.user-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }

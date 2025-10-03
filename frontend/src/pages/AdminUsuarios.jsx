@@ -34,7 +34,7 @@ const AdminUsuarios = () => {
 
   const obtenerUsuarios = () => {
     api
-      .get("/usuarios") // ✅ Asegurate que esté montado en el backend como /usuarios
+      .get("/usuarios")
       .then((response) => setUsuarios(response.data))
       .catch((error) => {
         console.error("Error al obtener usuarios:", error)
@@ -110,7 +110,7 @@ const AdminUsuarios = () => {
     setFormData({
       nombre: user.nombre,
       email: user.email,
-      password: "", // Seguridad: no se muestra la contraseña
+      password: "", 
       fechaNacimiento: user.fechaNacimiento?.slice(0, 10) || "",
       rol: user.rol || "cliente",
     })

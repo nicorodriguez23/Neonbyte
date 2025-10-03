@@ -1,12 +1,25 @@
+// src/utils/auth.js
+
+// Guardar sesión (token y usuario) en localStorage
 export const guardarSesion = (token, usuario) => {
-  localStorage.setItem("token", token)
-  localStorage.setItem("usuario", JSON.stringify(usuario))
-}
+  if (token) localStorage.setItem("token", token);
+  if (usuario) localStorage.setItem("usuario", JSON.stringify(usuario));
+};
 
+// Alias por compatibilidad (muchos ejemplos usan setSession)
+export const setSession = (token, usuario) => guardarSesion(token, usuario);
+
+// Cerrar sesión (borrar token y usuario)
 export const cerrarSesion = () => {
-  localStorage.removeItem("token")
-  localStorage.removeItem("usuario")
-}
+  localStorage.removeItem("token");
+  localStorage.removeItem("usuario");
+};
 
-export const obtenerToken = () => localStorage.getItem("token")
-export const obtenerUsuario = () => JSON.parse(localStorage.getItem("usuario"))
+// Obtener token
+export const obtenerToken = () => localStorage.getItem("token");
+
+// Obtener usuario (parseado) o null si no existe
+export const obtenerUsuario = () => {
+  const u = localStorage.getItem("usuario");
+  return u ? JSON.parse(u) : null;
+};

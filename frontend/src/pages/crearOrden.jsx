@@ -6,7 +6,7 @@ import "../styles/CrearOrden.css";
 const CrearOrden = ({ carrito, setCarrito }) => {
   const navigate = useNavigate();
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
-  const usuario = JSON.parse(localStorage.getItem("usuario")); // Obtenemos token y nombre
+  const usuario = JSON.parse(localStorage.getItem("usuario")); 
 
   const [formulario, setFormulario] = useState({
     nombre: "",
