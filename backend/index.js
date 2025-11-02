@@ -30,7 +30,7 @@ mongoose
 
 // Ruta raíz (opcional)
 app.get("/", (req, res) => {
-  res.send("¡Bienvenido al backend del integrador!");
+  res.send("¡Bienvenido al backend de Neonbyte");
 });
 
 // Rutas del backend
