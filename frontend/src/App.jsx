@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
+import Footer from "./components/footer.jsx";
 
 
 import Home from "./pages/Home";
