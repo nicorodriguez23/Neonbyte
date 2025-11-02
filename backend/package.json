@@ -1,14 +1,15 @@
 {
-  "name": "integrador-backend",
+  "name": "neonbyte-backend",
   "version": "1.0.0",
+  "description": "Backend del e-commerce NeonByte con Node.js, Express y MongoDB",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Ignacio Nicolás Rodríguez",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
