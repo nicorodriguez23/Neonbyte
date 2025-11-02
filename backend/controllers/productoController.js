@@ -174,6 +174,8 @@ const cargarEspecificaciones = async (req, res) => {
           "Tiempo de respuesta: 1ms",
         ],
       },
+
+      
     ];
 
     for (const item of actualizaciones) {
