@@ -1,67 +1,91 @@
-.mis-ordenes-container {
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+.mis-ordenes {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(15, 15, 15, 0.9);
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
   color: #e0e0e0;
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
+  text-align: center;
 }
 
-.mis-ordenes-container h1 {
-  font-size: 32px;
-  margin-bottom: 30px;
-  text-align: center;
+.mis-ordenes h2 {
   color: #00ffcc;
+  text-shadow: 0 0 10px #00ffcc;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
 }
 
 .orden-card {
-  background-color: #1a1a1a;
-  border: 1px solid #00ffcc55;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  background: rgba(26, 26, 26, 0.85);
+  border: 1px solid rgba(0, 255, 204, 0.3);
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 12px rgba(0, 255, 204, 0.15);
-  transition: transform 0.3s ease;
+  text-align: left;
+  margin-bottom: 25px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .orden-card:hover {
   transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
 }
 
-.orden-info {
-  margin-bottom: 10px;
+.orden-card p {
+  color: #ccc;
+  margin: 8px 0;
+  font-size: 0.95rem;
 }
 
-.orden-info strong {
+.orden-card strong {
   color: #00ffcc;
 }
 
-.producto-item {
-  padding: 10px 0;
-  border-top: 1px solid #444;
+.orden-card ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-top: 10px;
 }
 
-.producto-item:first-child {
-  border-top: none;
+.orden-card li {
+  margin: 4px 0;
+  color: #e0e0e0;
+  padding: 6px 8px;
+  background: rgba(15, 15, 15, 0.8);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  font-size: 0.9rem;
 }
 
-.producto-item p {
-  margin: 2px 0;
-  font-size: 15px;
-}
-
-.producto-item span {
+.mis-ordenes h3,
+.mis-ordenes h2[style],
+.mis-ordenes h3[style] {
   color: #00ffcc;
+  text-shadow: 0 0 8px #00ffcc;
+  font-weight: normal;
 }
 
-@media (max-width: 600px) {
-  .mis-ordenes-container {
-    padding: 20px 10px;
+.mis-ordenes {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .mis-ordenes {
+    padding: 20px;
   }
 
   .orden-card {
     padding: 15px;
   }
 
-  .mis-ordenes-container h1 {
-    font-size: 24px;
+  .orden-card li {
+    font-size: 0.85rem;
   }
 }

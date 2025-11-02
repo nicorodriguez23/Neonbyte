@@ -3,7 +3,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/footer"
 import Header from "./components/Header"
 

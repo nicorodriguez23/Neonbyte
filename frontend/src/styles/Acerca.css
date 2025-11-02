@@ -11,50 +11,49 @@ body {
 }
 
 .header {
+  height: 15vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
-  padding: 20px;
+  background: linear-gradient(180deg, rgba(0, 255, 204, 0.1) 0%, rgba(15, 15, 15, 1) 100%);
+  border-bottom: 2px solid #00ffcc33;
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
   position: relative;
-}
-
-.logo-section {
-  position: absolute;
-  left: 20px;
-}
-
-.logo-navbar {
-  max-width: 90px;
-  height: auto;
-  object-fit: contain;
+  overflow: hidden;
 }
 
 .acerca-title {
   color: #00ffcc;
   font-size: 2rem;
+  text-shadow: 0 0 20px #00ffcc;
+  letter-spacing: 1px;
+  text-align: center;
 }
-
 
 .acerca-container {
   max-width: 1200px;
-  margin: auto;
-  padding: 40px 20px;
+  margin: 0 auto;
+  padding: 60px 20px 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: transparent;
 }
 
 .intro {
-  max-width: 800px;
+  max-width: 850px;
   font-size: 1.1rem;
   line-height: 1.8;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .intro p {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+}
+
+.intro strong {
+  color: #00ffcc;
 }
 
 .features {
@@ -62,59 +61,65 @@ body {
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .feature {
   flex: 1 1 280px;
-  background-color: #1a1a1a;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+  background: rgba(26, 26, 26, 0.85);
+  border: 1px solid rgba(0, 255, 204, 0.3);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+}
+
+.feature h3 {
+  color: #00ffcc;
+  margin-bottom: 10px;
 }
 
 .ceo-section {
-  background-color: #1a1a1a;
-  padding: 30px;
+  background: rgba(26, 26, 26, 0.85);
+  padding: 40px;
   border-radius: 10px;
   text-align: center;
   max-width: 600px;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(0, 255, 204, 0.3);
 }
 
 .ceo-section img {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  border: 3px solid #00ffcc;
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
 }
 
-.footer {
-  background-color: #1a1a1a;
-  text-align: center;
-  padding: 15px;
-  font-size: 0.9rem;
-  color: #888;
-}
-
-.footer a {
+.ceo-section h2 {
   color: #00ffcc;
-  text-decoration: none;
+  margin-bottom: 10px;
 }
 
-.footer a:hover {
-  text-decoration: underline;
+.ceo-section p {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d0d0d0;
 }
-
 
 @media (max-width: 768px) {
   .acerca-title {
-    font-size: 1.5rem;
-  }
-
-  .logo-navbar {
-    max-width: 70px;
+    font-size: 2.2rem;
   }
 
   .intro {
@@ -122,23 +127,19 @@ body {
     padding: 0 10px;
   }
 
-  .features {
-    flex-direction: column;
-    gap: 20px;
+  .feature {
+    width: 100%;
   }
 
-  .feature {
-    flex: 1 1 100%;
+  .ceo-section img {
+    width: 130px;
+    height: 130px;
   }
 }
 
 @media (max-width: 480px) {
   .acerca-title {
-    font-size: 1.3rem;
-  }
-
-  .logo-navbar {
-    max-width: 60px;
+    font-size: 1.8rem;
   }
 
   .intro {
@@ -149,10 +150,4 @@ body {
     width: 120px;
     height: 120px;
   }
-}
-.acerca-title {
-  color: #00ffcc;
-  font-size: 2rem;
-  width: 100%;
-  text-align: center;
 }

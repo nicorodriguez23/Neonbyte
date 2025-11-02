@@ -11,6 +11,7 @@ import ssdSamsung from "../assets/images/ssd-samsung.png";
 import fuenteEVGA from "../assets/images/fuente.png";
 import tecladoCorsair from "../assets/images/teclado.png";
 import auricularesSteelSeries from "../assets/images/auriculares.png";
+import mouseLogitech from "../assets/images/mouse-logitech-g502.png";
 
 const AdminProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -28,75 +29,21 @@ const AdminProductos = () => {
 
   const token = localStorage.getItem("token");
   const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
   };
 
   useEffect(() => {
-    api.get("/productos")
+    api
+      .get("/productos")
       .then((res) => setProductos(res.data))
-      .catch((err) => {
-        console.error("Error al obtener productos:", err.message);
+      .catch(() => {
         setMensaje("Error al cargar productos");
         setTipoMensaje("error");
       });
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.nombre || !formData.precio || !formData.descripcion || !formData.fechaCreacion || !formData.categoria) {
-      setMensaje("Por favor completa todos los campos");
-      setTipoMensaje("error");
-      setTimeout(() => setMensaje(""), 2000);
-      return;
-    }
-
-    if (editar) {
-      api.put(`/productos/${editar}`, formData, config)
-        .then((res) => {
-          setProductos(productos.map((p) => (p._id === editar ? res.data : p)));
-          limpiarFormulario();
-          mostrarMensaje("Producto actualizado", "success");
-        })
-        .catch((err) => {
-          mostrarMensaje("Error al actualizar", "error");
-          console.error(err);
-        });
-    } else {
-      api.post("/productos", formData, config)
-        .then((res) => {
-          setProductos([...productos, res.data]);
-          limpiarFormulario();
-          mostrarMensaje("Producto creado", "success");
-        })
-        .catch((err) => {
-          mostrarMensaje("Error al crear producto", "error");
-          console.error(err);
-        });
-    }
-  };
-
-  const handleEdit = (producto) => {
-    setFormData(producto);
-    setEditar(producto._id);
-  };
-
-  const handleDelete = (id) => {
-    api.delete(`/productos/${id}`, config)
-      .then(() => {
-        setProductos(productos.filter((p) => p._id !== id));
-        mostrarMensaje("Producto eliminado", "success");
-      })
-      .catch((err) => {
-        mostrarMensaje("Error al eliminar", "error");
-        console.error(err);
-      });
-  };
 
   const limpiarFormulario = () => {
     setFormData({
@@ -116,6 +63,55 @@ const AdminProductos = () => {
     setTimeout(() => setMensaje(""), 2000);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !formData.nombre ||
+      !formData.precio ||
+      !formData.descripcion ||
+      !formData.fechaCreacion ||
+      !formData.categoria
+    ) {
+      mostrarMensaje("Por favor completa todos los campos", "error");
+      return;
+    }
+
+    if (editar) {
+      api
+        .put(`/productos/${editar}`, formData, config)
+        .then((res) => {
+          setProductos(productos.map((p) => (p._id === editar ? res.data : p)));
+          limpiarFormulario();
+          mostrarMensaje("Producto actualizado", "success");
+        })
+        .catch(() => mostrarMensaje("Error al actualizar", "error"));
+    } else {
+      api
+        .post("/productos", formData, config)
+        .then((res) => {
+          setProductos([...productos, res.data]);
+          limpiarFormulario();
+          mostrarMensaje("Producto creado", "success");
+        })
+        .catch(() => mostrarMensaje("Error al crear producto", "error"));
+    }
+  };
+
+  const handleEdit = (producto) => {
+    setFormData(producto);
+    setEditar(producto._id);
+  };
+
+  const handleDelete = (id) => {
+    api
+      .delete(`/productos/${id}`, config)
+      .then(() => {
+        setProductos(productos.filter((p) => p._id !== id));
+        mostrarMensaje("Producto eliminado", "success");
+      })
+      .catch(() => mostrarMensaje("Error al eliminar", "error"));
+  };
+
   const imagenesLocales = {
     "Tarjeta Gráfica RTX 4090": tarjetaGrafica,
     "Procesador Intel i9-13900K": intelI9,
@@ -126,6 +122,7 @@ const AdminProductos = () => {
     "Teclado Mecánico Corsair K70": tecladoCorsair,
     "Monitor Acer Predator": monitorAcer,
     "Auriculares SteelSeries Arctis 7": auricularesSteelSeries,
+    "Mouse Logitech G502 Lightspeed": mouseLogitech,
   };
 
   return (
@@ -151,7 +148,9 @@ const AdminProductos = () => {
           <option value="Fuentes de Poder">Fuentes de Poder</option>
           <option value="Periféricos">Periféricos</option>
         </select>
-        <button type="submit" className="btn-crear">{editar ? "Actualizar" : "Crear"}</button>
+        <button type="submit" className="btn-crear">
+          {editar ? "Actualizar" : "Crear"}
+        </button>
       </form>
 
       {mensaje && <div className={`toast-mensaje ${tipoMensaje}`}>{mensaje}</div>}
@@ -170,29 +169,39 @@ const AdminProductos = () => {
               </tr>
             </thead>
             <tbody>
-              {productos.map((p) => (
-                <tr key={p._id}>
-                  <td className="imagen-cell">
-                    <img
-                      src={imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg"}
-                      alt={p.nombre}
-                      className="producto-imagen-mini"
-                      onError={(e) => (e.target.src = "/placeholder.svg")}
-                    />
-                  </td>
-                  <td className="nombre-cell">
-                    <strong>{p.nombre}</strong>
-                    <p className="descripcion-mini">{p.descripcion}</p>
-                  </td>
-                  <td className="precio-cell">${p.precio}</td>
-                  <td>{p.categoria}</td>
-                  <td>{new Date(p.fechaCreacion).toLocaleDateString()}</td>
-                  <td className="acciones-cell">
-                    <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
-                    <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>Eliminar</button>
-                  </td>
-                </tr>
-              ))}
+              {productos.map((p) => {
+                const imagen =
+                  imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg";
+                return (
+                  <tr key={p._id}>
+                    <td className="imagen-cell">
+                      <img
+                        src={imagen}
+                        alt={p.nombre}
+                        className="producto-imagen-mini"
+                        onError={(e) => (e.target.src = "/placeholder.svg")}
+                      />
+                    </td>
+                    <td className="nombre-cell">
+                      <strong>{p.nombre}</strong>
+                      <p className="descripcion-mini">{p.descripcion}</p>
+                    </td>
+                    <td className="precio-cell">${p.precio}</td>
+                    <td>{p.categoria}</td>
+                    <td>
+                      {p.createdAt
+                        ? new Date(p.createdAt).toLocaleDateString()
+                        : p.fechaCreacion
+                        ? new Date(p.fechaCreacion).toLocaleDateString()
+                        : "—"}
+                    </td>
+                    <td className="acciones-cell">
+                      <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
+                      <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>Eliminar</button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
