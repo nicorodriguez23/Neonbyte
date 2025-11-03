@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/footer.jsx";
+import Footer from "./components/Footer.jsx";
 
 
 import Home from "./pages/Home";
@@ -17,7 +17,7 @@ import Carrito from "./pages/Carrito";
 
 import DetalleProducto from "./pages/DetallesProductos/DetalleProducto";
 import CrearOrden from "./pages/crearOrden";
-import Pago from "./pages/pago.jsx";
+import Pago from "./pages/Pago.jsx";
 
 import AdminProductos from "./pages/AdminProductos";
 import AdminUsuarios from "./pages/AdminUsuarios";
