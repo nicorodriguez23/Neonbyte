@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://neonbyte.onrender.com/$1" }
+    { "source": "/api/(.*)", "destination": "https://neonbyte.onrender.com/api/$1" }
   ]
 }
