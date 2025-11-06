@@ -7,33 +7,36 @@ dotenv.config();
 
 const app = express();
 
-// Configuración recomendada de CORS para desarrollo local
 app.use(cors({
-  origin: 'http://localhost:5173', // Cambia por la URL de tu frontend si es necesario
+  origin: [
+    "http://localhost:5173",
+    "https://neonbyte-one.vercel.app"
+  ],
   credentials: true
 }));
+
 
 app.use(express.json());
 
 // Conexión a MongoDB
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { dbName: "integrador" })
   .then(() => {
-    console.log("✅ Conectado a MongoDB correctamente");
-    app.listen(process.env.PORT, () => {
-      console.log(`🚀 Servidor corriendo en http://localhost:${process.env.PORT}`);
+    console.log("✅ Conectado a MongoDB correctamente (DB: integrador)");
+    app.listen(process.env.PORT || 4000, () => {
+      console.log(`🚀 Servidor corriendo en el puerto ${process.env.PORT || 4000}`);
     });
   })
   .catch((error) => {
     console.error("❌ Error al conectar a MongoDB:", error);
   });
 
-// Ruta raíz (opcional)
+
 app.get("/", (req, res) => {
   res.send("¡Bienvenido al backend de Neonbyte");
 });
 
-// Rutas del backend
+
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const productoRoutes = require("./routes/productoRoutes");
 const ordenRoutes = require("./routes/ordenRoutes");
