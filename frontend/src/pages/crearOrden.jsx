@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
-import "../styles/CrearOrden.css";
+import "../styles/crearOrden.css";
 
 const CrearOrden = ({ carrito, setCarrito }) => {
   const navigate = useNavigate();

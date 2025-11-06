@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import "../styles/AdminUsuarios.css";
+import "../styles/adminUsuarios.css";
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);

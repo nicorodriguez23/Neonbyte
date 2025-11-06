@@ -1,4 +1,4 @@
-import "../styles/Acerca.css"
+import "../styles/acerca.css"
 import fotoCeo from "../assets/images/foto-integrador.jpg"
 
 export default function Acerca() {

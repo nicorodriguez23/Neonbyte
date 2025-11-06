@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import "../styles/MisOrdenes.css";
+import "../styles/misordenes.css";
 
 const MisOrdenes = () => {
   const [ordenes, setOrdenes] = useState([]);

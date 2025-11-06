@@ -19,7 +19,7 @@ import banner1 from "../assets/images/banner.png";
 import banner2 from "../assets/images/banner2.jpg";
 import banner3 from "../assets/images/banner3.jpg";
 
-import "../styles/Home.css";
+import "../styles/home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const imagenesLocales = {

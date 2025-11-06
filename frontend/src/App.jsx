@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
-import Navbar from "./components/Navbar.jsx";
+import Navbar from "./components/navbar.jsx";
 import Footer from "./components/Footer";
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Carrito.css";
+import "../styles/carrito.css";
 
 const Carrito = ({ carrito, setCarrito }) => {
   const navigate = useNavigate();

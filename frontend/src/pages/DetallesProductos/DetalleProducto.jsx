@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
-import "../../styles/DetalleProducto.css";
+import "../../styles/detalleProducto.css";
 
 
 import monitorAcer from "../../assets/images/monitor.png";

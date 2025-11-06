@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import "../styles/AdminProductos.css";
+import "../styles/adminProductos.css";
 
 import monitorAcer from "../assets/images/monitor.png";
 import tarjetaGrafica from "../assets/images/tarjeta-grafica.png";

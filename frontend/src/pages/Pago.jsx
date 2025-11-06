@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Pago.css";
+import "../styles/pago.css";
 import logo from "../assets/images/logo-neonbyte.png";
 
 

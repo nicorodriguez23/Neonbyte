@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/login.css";
 import api from "../services/api.js";
 import { guardarSesion } from "../utils/auth";
 import { showSuccess, showError } from "../utils/toast";

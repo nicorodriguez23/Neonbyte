@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import "../styles/Register.css"
+import "../styles/register.css"
 import api from "../services/api"
 
 const Registro = () => {
