@@ -1,16 +1,15 @@
 import axios from "axios";
 
-const FALLBACK = typeof window !== "undefined" ? "/api" : "http://localhost:5173/api";
-const baseURL = (import.meta?.env?.VITE_API_BASE_URL || "").trim() || FALLBACK;
+const baseURL = (import.meta?.env?.VITE_API_BASE_URL || "/api").trim();
+
+console.log("API baseURL =>", baseURL); // debug visible en prod
 
 const api = axios.create({ baseURL });
 
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => Promise.reject(error)
