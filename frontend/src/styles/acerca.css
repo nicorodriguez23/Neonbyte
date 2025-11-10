@@ -94,12 +94,15 @@ body {
   border: 1px solid rgba(0, 255, 204, 0.3);
 }
 
+/* ✅ FOTO CENTRADA Y SIN CORTAR LA CARA — AJUSTADO */
 .ceo-section img {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
+  object-position: center top;
+  display: block;
+  margin: 0 auto 20px auto;
   border: 3px solid #00ffcc;
   box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
 }
