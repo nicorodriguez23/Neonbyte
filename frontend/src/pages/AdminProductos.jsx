@@ -126,7 +126,8 @@ const AdminProductos = () => {
   return (
     <div className="admin-container">
       <header className="admin-header">
-        <h1 className="admin-title">Gestión de Productos</h1>
+        <h2>Gestión de Productos</h2>
+        <p>Administra los productos de NeonByte</p>
       </header>
 
       <form onSubmit={handleSubmit} className="formulario">
