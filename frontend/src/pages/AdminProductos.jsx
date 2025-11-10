@@ -28,9 +28,7 @@ const AdminProductos = () => {
   const [editar, setEditar] = useState(null);
 
   const token = localStorage.getItem("token");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     api
@@ -98,7 +96,14 @@ const AdminProductos = () => {
   };
 
   const handleEdit = (producto) => {
-    setFormData(producto);
+    setFormData({
+      nombre: producto.nombre || "",
+      precio: producto.precio || "",
+      descripcion: producto.descripcion || "",
+      imagen: producto.imagen || "",
+      fechaCreacion: producto.fechaCreacion || "",
+      categoria: producto.categoria || "",
+    });
     setEditar(producto._id);
   };
 
@@ -128,17 +133,52 @@ const AdminProductos = () => {
   return (
     <div className="admin-container">
       <header className="admin-header">
-        <h2>Gestión de Productos</h2>
-        <p>Administra los productos de NeonByte</p>
+        <div>
+          <h2>Gestión de Productos</h2>
+          <p>Administra los productos de NeonByte</p>
+        </div>
       </header>
 
       <form onSubmit={handleSubmit} className="formulario">
-        <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
-        <input type="text" name="precio" placeholder="Precio" value={formData.precio} onChange={handleChange} />
-        <input type="text" name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleChange} />
-        <input type="text" name="imagen" placeholder="URL de Imagen" value={formData.imagen} onChange={handleChange} />
-        <input type="date" name="fechaCreacion" value={formData.fechaCreacion} onChange={handleChange} />
-        <select name="categoria" value={formData.categoria} onChange={handleChange}>
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          value={formData.nombre}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="precio"
+          placeholder="Precio"
+          value={formData.precio}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="descripcion"
+          placeholder="Descripción"
+          value={formData.descripcion}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="imagen"
+          placeholder="URL de Imagen"
+          value={formData.imagen}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          name="fechaCreacion"
+          value={formData.fechaCreacion}
+          onChange={handleChange}
+        />
+        <select
+          name="categoria"
+          value={formData.categoria}
+          onChange={handleChange}
+        >
           <option value="">Selecciona una categoría</option>
           <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
           <option value="Procesadores">Procesadores</option>
@@ -148,6 +188,7 @@ const AdminProductos = () => {
           <option value="Fuentes de Poder">Fuentes de Poder</option>
           <option value="Periféricos">Periféricos</option>
         </select>
+
         <button type="submit" className="btn-crear">
           {editar ? "Actualizar" : "Crear"}
         </button>
@@ -170,8 +211,7 @@ const AdminProductos = () => {
             </thead>
             <tbody>
               {productos.map((p) => {
-                const imagen =
-                  imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg";
+                const imagen = imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg";
                 return (
                   <tr key={p._id}>
                     <td className="imagen-cell">
@@ -179,7 +219,7 @@ const AdminProductos = () => {
                         src={imagen}
                         alt={p.nombre}
                         className="producto-imagen-mini"
-                        onError={(e) => (e.target.src = "/placeholder.svg")}
+                        onError={(e) => (e.currentTarget.src = "/placeholder.svg")}
                       />
                     </td>
                     <td className="nombre-cell">
@@ -196,8 +236,12 @@ const AdminProductos = () => {
                         : "—"}
                     </td>
                     <td className="acciones-cell">
-                      <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
-                      <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>Eliminar</button>
+                      <button className="btn-editar" onClick={() => handleEdit(p)}>
+                        Editar
+                      </button>
+                      <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>
+                        Eliminar
+                      </button>
                     </td>
                   </tr>
                 );
