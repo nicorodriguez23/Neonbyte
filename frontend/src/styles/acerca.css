@@ -10,7 +10,6 @@ body {
   color: #e0e0e0;
 }
 
-/* ---------- Header ---------- */
 .header {
   height: 15vh;
   display: flex;
@@ -31,7 +30,6 @@ body {
   text-align: center;
 }
 
-/* ---------- Layout ---------- */
 .acerca-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -74,7 +72,6 @@ body {
 }
 .feature h3 { color: #00ffcc; margin-bottom: 10px; }
 
-/* ---------- CEO Card ---------- */
 .ceo-section {
   background: rgba(26, 26, 26, 0.85);
   padding: 40px;
@@ -84,30 +81,27 @@ body {
   margin-inline: auto;
   box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
   border: 1px solid rgba(0, 255, 204, 0.3);
-  display: grid;                 /* centra todo en ambos ejes */
+  display: grid;
   place-items: center;
   gap: 18px;
 }
 
-/* Contenedor para asegurar centrado y proporción cuadrada */
 .ceo-avatar {
-  width: 190px;                  /* desktop */
+  width: 190px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  padding: 4px;                  /* aro externo */
+  padding: 4px;
   background: radial-gradient(closest-side, #00ffcc, #00ffcc22 70%, transparent);
   box-shadow: 0 0 25px rgba(0, 255, 204, 0.35);
   display: grid;
   place-items: center;
 }
 
-/* Imagen dentro del círculo */
 .ceo-avatar img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;             /* encuadre perfecto */
-  object-position: center 40%;   /* levanta un poco el rostro */
+  object-fit: cover;
   border: 3px solid #00ffcc;
   display: block;
 }
@@ -127,16 +121,16 @@ body {
   color: #d0d0d0;
 }
 
-/* ---------- Responsive ---------- */
+
 @media (max-width: 768px) {
   .acerca-title { font-size: 2rem; }
   .intro { font-size: 1rem; padding: 0 10px; }
   .feature { width: 100%; }
-  .ceo-avatar { width: 150px; }        /* mobile */
+  .ceo-avatar { width: 150px; }     
 }
 
 @media (max-width: 480px) {
   .acerca-title { font-size: 1.7rem; }
   .intro { font-size: 0.95rem; }
-  .ceo-avatar { width: 135px; }        /* más chico en phones pequeños */
+  .ceo-avatar { width: 135px; }
 }
