@@ -1,4 +1,3 @@
-// index.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,25 +7,24 @@ dotenv.config();
 
 const app = express();
 
-// ---- CORS (prod + previews de Vercel + local) ----
-const allowed = [
+const allowedOrigins = [
   "http://localhost:5173",
   "https://neonbyte-one.vercel.app",
-  /\.vercel\.app$/, // cualquier preview de Vercel
 ];
+
+const vercelRegex = /\.vercel\.app$/;
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // permitir tools como Postman (sin origin)
+      
       if (!origin) return callback(null, true);
 
-      const ok = allowed.some((rule) =>
-        rule instanceof RegExp ? rule.test(origin) : rule === origin
-      );
-      return ok
-        ? callback(null, true)
-        : callback(new Error("Not allowed by CORS: " + origin));
+      const isAllowed =
+        allowedOrigins.includes(origin) || vercelRegex.test(new URL(origin).hostname);
+
+      if (isAllowed) return callback(null, true);
+      return callback(new Error(`CORS bloqueado: ${origin}`));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -34,13 +32,12 @@ app.use(
   })
 );
 
-// preflight global
+
 app.options("*", cors());
 
-// ---- middlewares comunes ----
 app.use(express.json());
 
-// ---- DB ----
+
 mongoose
   .connect(process.env.MONGO_URI, { dbName: "integrador" })
   .then(() => {
@@ -53,12 +50,10 @@ mongoose
     console.error("❌ Error al conectar a MongoDB:", error);
   });
 
-// ---- healthcheck ----
 app.get("/", (req, res) => {
   res.send("¡Bienvenido al backend de Neonbyte!");
 });
 
-// ---- rutas ----
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const productoRoutes = require("./routes/productoRoutes");
 const ordenRoutes = require("./routes/ordenRoutes");
