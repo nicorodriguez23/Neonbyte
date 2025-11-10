@@ -1,13 +1,14 @@
+/* HERO consistente con el resto del sitio */
 .admin-header {
   width: 100%;
-  height: 15vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(0,255,204,0.1) 0%, rgba(15,15,15,1) 100%);
+  background: linear-gradient(180deg, rgba(0,255,204,0.10) 0%, rgba(15,15,15,1) 100%);
   border-bottom: 2px solid #00ffcc33;
   box-shadow: 0 0 25px rgba(0,255,204,0.15);
   margin-bottom: 40px;
@@ -15,16 +16,18 @@
 
 .admin-header h2 {
   color: #00ffcc;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   text-shadow: 0 0 12px #00ffcc;
+  letter-spacing: .5px;
 }
 
 .admin-header p {
   color: #bfeee8;
-  opacity: 0.9;
-  font-size: 1.1rem;
+  opacity: .95;
+  font-size: 1.06rem;
 }
 
+/* Contenedor general */
 .admin-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -32,12 +35,13 @@
   color: #e0e0e0;
 }
 
+/* Tarjeta del formulario */
 .user-form {
   background: rgba(26, 26, 26, 0.95);
   border: 1px solid rgba(0,255,204,0.35);
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0,255,204,0.12);
-  padding: 30px;
+  padding: 28px;
   margin: 0 auto 40px;
   max-width: 900px;
   text-align: center;
@@ -45,10 +49,11 @@
 
 .user-form h3 {
   color: #00ffcc;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   text-shadow: 0 0 10px #00ffcc;
 }
 
+/* Layout de inputs */
 .user-form form {
   display: flex;
   flex-wrap: wrap;
@@ -75,7 +80,8 @@
   box-shadow: 0 0 10px rgba(0,255,204,0.4);
 }
 
-button {
+/* Botón primario (scopeado para no afectar otros) */
+.user-form button {
   width: 100%;
   max-width: 300px;
   background: #00ffcc;
@@ -91,11 +97,12 @@ button {
   align-self: center;
 }
 
-button:hover {
+.user-form button:hover {
   background: #00e6b8;
   transform: translateY(-1px);
 }
 
+/* Tabla */
 .table-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -127,6 +134,7 @@ button:hover {
   vertical-align: top;
 }
 
+/* Acciones */
 .acciones-cell {
   display: flex;
   gap: 8px;
@@ -164,6 +172,7 @@ button:hover {
   box-shadow: 0 0 12px rgba(255,77,77,0.35);
 }
 
+/* Toast */
 .toast-mensaje {
   text-align: center;
   background: #112725;
@@ -177,15 +186,22 @@ button:hover {
   box-shadow: 0 0 10px rgba(0,255,204,0.2);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
+  .admin-header h2 { font-size: 1.9rem; }
+  .admin-header p  { font-size: .98rem; }
+
   .user-form form {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
-  button {
-    max-width: 90%;
+
+  .user-form input,
+  .user-form select {
+    flex: 1 1 100%;
   }
-  .admin-header h2 {
-    font-size: 2rem;
+
+  .user-form button {
+    max-width: 100%;
   }
 }
