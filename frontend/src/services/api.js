@@ -1,17 +1,6 @@
 import axios from "axios";
 
-// Si la env existe, úsala. Si no, usa /api.
-// Pero si estamos en Vercel (dominio vercel.app) y quedó /api, forzamos Render.
-const ENV = (import.meta?.env?.VITE_API_BASE_URL || "").trim();
-let baseURL = ENV || "/api";
-
-if (typeof window !== "undefined") {
-  const host = window.location.hostname;
-  const isVercel = host.endsWith(".vercel.app");
-  if (isVercel && baseURL === "/api") {
-    baseURL = "https://neonbyte.onrender.com/api";
-  }
-}
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 console.log("API baseURL =>", baseURL);
 
@@ -24,7 +13,7 @@ api.interceptors.request.use((config) => {
 }, Promise.reject);
 
 api.interceptors.response.use(
-  (r) => r,
+  (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
       localStorage.removeItem("token");
