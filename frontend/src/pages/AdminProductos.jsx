@@ -40,8 +40,7 @@ const AdminProductos = () => {
       });
   }, []);
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const limpiarFormulario = () => {
     setFormData({
@@ -63,13 +62,7 @@ const AdminProductos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !formData.nombre ||
-      !formData.precio ||
-      !formData.descripcion ||
-      !formData.fechaCreacion ||
-      !formData.categoria
-    ) {
+    if (!formData.nombre || !formData.precio || !formData.descripcion || !formData.fechaCreacion || !formData.categoria) {
       mostrarMensaje("Por favor completa todos los campos", "error");
       return;
     }
@@ -96,14 +89,7 @@ const AdminProductos = () => {
   };
 
   const handleEdit = (producto) => {
-    setFormData({
-      nombre: producto.nombre || "",
-      precio: producto.precio || "",
-      descripcion: producto.descripcion || "",
-      imagen: producto.imagen || "",
-      fechaCreacion: producto.fechaCreacion || "",
-      categoria: producto.categoria || "",
-    });
+    setFormData(producto);
     setEditar(producto._id);
   };
 
@@ -132,53 +118,17 @@ const AdminProductos = () => {
 
   return (
     <div className="admin-container">
-      <header className="admin-header">
-        <div>
-          <h2>Gestión de Productos</h2>
-          <p>Administra los productos de NeonByte</p>
-        </div>
+      <header className="admin-hero">
+        <h2 className="admin-title">Gestión de Productos</h2>
       </header>
 
       <form onSubmit={handleSubmit} className="formulario">
-        <input
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="precio"
-          placeholder="Precio"
-          value={formData.precio}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="descripcion"
-          placeholder="Descripción"
-          value={formData.descripcion}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="imagen"
-          placeholder="URL de Imagen"
-          value={formData.imagen}
-          onChange={handleChange}
-        />
-        <input
-          type="date"
-          name="fechaCreacion"
-          value={formData.fechaCreacion}
-          onChange={handleChange}
-        />
-        <select
-          name="categoria"
-          value={formData.categoria}
-          onChange={handleChange}
-        >
+        <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
+        <input type="text" name="precio" placeholder="Precio" value={formData.precio} onChange={handleChange} />
+        <input type="text" name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleChange} />
+        <input type="text" name="imagen" placeholder="URL de Imagen" value={formData.imagen} onChange={handleChange} />
+        <input type="date" name="fechaCreacion" value={formData.fechaCreacion} onChange={handleChange} />
+        <select name="categoria" value={formData.categoria} onChange={handleChange}>
           <option value="">Selecciona una categoría</option>
           <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
           <option value="Procesadores">Procesadores</option>
@@ -188,10 +138,7 @@ const AdminProductos = () => {
           <option value="Fuentes de Poder">Fuentes de Poder</option>
           <option value="Periféricos">Periféricos</option>
         </select>
-
-        <button type="submit" className="btn-crear">
-          {editar ? "Actualizar" : "Crear"}
-        </button>
+        <button type="submit" className="btn-crear">{editar ? "Actualizar" : "Crear"}</button>
       </form>
 
       {mensaje && <div className={`toast-mensaje ${tipoMensaje}`}>{mensaje}</div>}
@@ -219,7 +166,7 @@ const AdminProductos = () => {
                         src={imagen}
                         alt={p.nombre}
                         className="producto-imagen-mini"
-                        onError={(e) => (e.currentTarget.src = "/placeholder.svg")}
+                        onError={(e) => (e.target.src = "/placeholder.svg")}
                       />
                     </td>
                     <td className="nombre-cell">
@@ -236,12 +183,8 @@ const AdminProductos = () => {
                         : "—"}
                     </td>
                     <td className="acciones-cell">
-                      <button className="btn-editar" onClick={() => handleEdit(p)}>
-                        Editar
-                      </button>
-                      <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>
-                        Eliminar
-                      </button>
+                      <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
+                      <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>Eliminar</button>
                     </td>
                   </tr>
                 );
