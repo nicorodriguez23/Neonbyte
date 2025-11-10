@@ -7,35 +7,37 @@ dotenv.config();
 
 const app = express();
 
-const allowedList = [
+const WHITELIST = [
   "http://localhost:5173",
   "https://neonbyte-one.vercel.app",
 ];
 
-const vercelRegex = /^https?:\/\/([a-z0-9-]+\.)*vercel\.app$/i;
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
 
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true);
+    const isWhitelisted =
+      WHITELIST.includes(origin) || /\.vercel\.app$/.test(origin);
 
-      if (allowedList.includes(origin) || vercelRegex.test(origin)) {
-        return cb(null, true);
-      }
-      return cb(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-  })
-);
+    if (isWhitelisted) return callback(null, true);
+    return callback(new Error(`CORS not allowed: ${origin}`));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
+};
 
-app.options("*", cors());
-
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); 
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGO_URI, { dbName: "integrador" })
+  .connect(process.env.MONGO_URI, {
+    dbName: process.env.DB_NAME || "integrador",
+  })
   .then(() => {
-    console.log("✅ Conectado a MongoDB correctamente (DB: integrador)");
+    console.log("✅ Conectado a MongoDB correctamente (DB:", process.env.DB_NAME || "integrador", ")");
     const PORT = process.env.PORT || 4000;
     app.listen(PORT, () => {
       console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
@@ -47,11 +49,11 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.send("¡Bienvenido al backend de Neonbyte!");
+  res.send("Bienvenido al backend de NeonByte");
 });
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
+  res.status(200).send("ok");
 });
 
 const usuarioRoutes = require("./routes/usuarioRoutes");
@@ -61,9 +63,10 @@ const ordenRoutes = require("./routes/ordenRoutes");
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/productos", productoRoutes);
 app.use("/api/ordenes", ordenRoutes);
+
 app.use((err, req, res, next) => {
-  if (err?.message === "Not allowed by CORS") {
-    return res.status(403).json({ error: "CORS: origen no permitido" });
+  if (err?.message?.startsWith("CORS not allowed")) {
+    return res.status(403).json({ error: "CORS bloqueado", origin: req.headers.origin });
   }
-  return next(err);
+  next(err);
 });
