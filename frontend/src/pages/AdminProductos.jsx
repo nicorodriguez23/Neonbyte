@@ -40,7 +40,8 @@ const AdminProductos = () => {
       });
   }, []);
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const limpiarFormulario = () => {
     setFormData({
@@ -62,7 +63,13 @@ const AdminProductos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.nombre || !formData.precio || !formData.descripcion || !formData.fechaCreacion || !formData.categoria) {
+    if (
+      !formData.nombre ||
+      !formData.precio ||
+      !formData.descripcion ||
+      !formData.fechaCreacion ||
+      !formData.categoria
+    ) {
       mostrarMensaje("Por favor completa todos los campos", "error");
       return;
     }
@@ -118,8 +125,8 @@ const AdminProductos = () => {
 
   return (
     <div className="admin-container">
-      <header className="admin-hero">
-        <h2 className="admin-title">Gestión de Productos</h2>
+      <header className="admin-header">
+        <h1 className="admin-title">Gestión de Productos</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="formulario">
@@ -138,7 +145,9 @@ const AdminProductos = () => {
           <option value="Fuentes de Poder">Fuentes de Poder</option>
           <option value="Periféricos">Periféricos</option>
         </select>
-        <button type="submit" className="btn-crear">{editar ? "Actualizar" : "Crear"}</button>
+        <button type="submit" className="btn-crear">
+          {editar ? "Actualizar" : "Crear"}
+        </button>
       </form>
 
       {mensaje && <div className={`toast-mensaje ${tipoMensaje}`}>{mensaje}</div>}
