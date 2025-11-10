@@ -84,17 +84,21 @@ body {
   margin-bottom: 10px;
 }
 
+/* === CEO card centrada en cualquier tamaño de pantalla === */
 .ceo-section {
   background: rgba(26, 26, 26, 0.85);
   padding: 40px;
   border-radius: 10px;
-  text-align: center;
-  max-width: 600px;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
-  border: 1px solid rgba(0, 255, 204, 0.3);
+  /* Centrado robusto con flex */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;       /* centra horizontalmente */
+  justify-content: flex-start;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;            /* asegura centrado del contenedor */
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(0, 255, 204, 0.3);
 }
 
 .ceo-section img {
@@ -102,8 +106,8 @@ body {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
-  margin: 0 auto 20px;
+  display: block;            /* elimina comportamiento inline */
+  margin: 0 auto 20px;       /* centra la imagen y separa del texto */
   border: 3px solid #00ffcc;
   box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
 }
@@ -120,7 +124,6 @@ body {
   line-height: 1.6;
   color: #d0d0d0;
 }
-
 
 @media (max-width: 768px) {
   .acerca-title {
@@ -139,6 +142,9 @@ body {
   .ceo-section img {
     width: 130px;
     height: 130px;
+    /* seguimos centrando en mobile */
+    display: block;
+    margin: 0 auto 18px;
   }
 }
 
@@ -154,5 +160,7 @@ body {
   .ceo-section img {
     width: 120px;
     height: 120px;
+    display: block;
+    margin: 0 auto 16px;
   }
 }
