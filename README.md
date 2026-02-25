@@ -1,100 +1,240 @@
-# NeonByte
+# ⚡ NeonByte — Gaming E-Commerce
 
-NeonByte es un e-commerce de componentes gamer desarrollado con el stack **MERN**.  
-El proyecto combina funcionalidad completa con una estética moderna y futurista, inspirada en el mundo del hardware y la tecnología.
+<div align="center">
+
+![NeonByte Banner](https://img.shields.io/badge/NeonByte-Gaming%20E--Commerce-00f5ff?style=for-the-badge&logo=react&logoColor=white)
+
+**E-commerce full stack de componentes y periféricos gamer**
+
+[![Deploy Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=flat-square&logo=vercel)](https://neonbyte.vercel.app)
+[![Deploy Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat-square&logo=render)](https://neonbyte.onrender.com)
+[![Stack](https://img.shields.io/badge/Stack-MERN-00f5ff?style=flat-square)](https://github.com/nicorodriguez23/neonbyte)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+[🌐 Ver Demo en Vivo](https://neonbyte.vercel.app) · [🐛 Reportar Bug](https://github.com/nicorodriguez23/neonbyte/issues) · [💡 Sugerir Feature](https://github.com/nicorodriguez23/neonbyte/issues)
+
+</div>
 
 ---
 
-## Descripción general
+## 📸 Preview
 
-El sitio permite a los usuarios navegar por un catálogo de productos, agregar artículos al carrito, realizar pedidos y registrarse con autenticación segura mediante JWT.  
-Incluye además un panel de administración para gestionar productos y usuarios, lo que lo convierte en un sistema de comercio electrónico completo y funcional.
+> _Capturas del proyecto en acción — desktop y mobile_
 
-El diseño fue pensado para mantener una identidad visual coherente con el concepto de “energía y tecnología”, utilizando tonos oscuros y acentos cian, junto con un estilo limpio, responsivo y de buena experiencia de usuario.
+| Home | Admin Panel | Detalle Producto |
+|------|-------------|-----------------|
+| ![Home](./screenshots/home.png) | ![Admin](./screenshots/admin.png) | ![Detalle](./screenshots/detalle.png) |
 
 ---
 
-## Tecnologías utilizadas
+## 🚀 Features
+
+### 🛒 E-Commerce
+- Catálogo de productos con filtros por categoría
+- Carrito de compras persistente en `localStorage`
+- Flujo completo de compra: carrito → orden → comprobante de pago
+- Comprobante imprimible con diseño profesional
+
+### 🔐 Autenticación & Seguridad
+- Registro y login con **JWT** (JSON Web Tokens)
+- Sistema de **roles** diferenciados: `admin` / `cliente`
+- **Auto-logout por inactividad** — cierre de sesión automático a los 10 minutos
+- Contraseñas encriptadas con **bcrypt**
+- Token almacenado y validado en cada request al backend
+
+### 🛠️ Panel de Administración
+- **CRUD completo** de productos y usuarios
+- Gestión de categorías, precios e imágenes
+- Protección de rutas por rol — solo admins acceden
+- Tablas con scroll horizontal adaptadas a mobile
+
+### 🎨 Diseño & UX
+- **Design system** propio con variables CSS (colores, tipografías, radios, animaciones)
+- Fondo animado con **Canvas API**: partículas flotantes + circuito RGB
+- Barra RGB animada con gradiente cyan/pink/green
+- Tipografías gaming: **Rajdhani** + **Exo 2**
+- **100% responsive** — mobile, tablet y desktop
+- Menú lateral mobile con backdrop y animaciones
+- Notificaciones toast personalizadas con react-toastify
+
+---
+
+## 🧱 Tech Stack
 
 ### Frontend
-- **React** con **Vite** para un entorno rápido y modular.
-- **React Router DOM** para la navegación entre páginas.
-- **Axios** para la comunicación con el backend.
-- **Bootstrap** y **CSS personalizado** para el diseño visual.
-- Manejo de **estado y persistencia** de carrito mediante localStorage.
+| Tecnología | Uso |
+|-----------|-----|
+| React 18 + Vite | UI y bundling |
+| React Router DOM | Navegación SPA |
+| Axios | Comunicación con la API |
+| CSS Variables + Custom Design System | Estilos globales |
+| Canvas API (vanilla) | Animaciones de fondo |
+| react-toastify | Notificaciones |
 
 ### Backend
-- **Node.js + Express** como base del servidor.
-- **MongoDB Atlas + Mongoose** para la base de datos.
-- **JWT (JSON Web Token)** para autenticación y roles.
-- **Multer** para la carga de imágenes.
-- **Bcrypt** para el encriptado de contraseñas.
+| Tecnología | Uso |
+|-----------|-----|
+| Node.js + Express | Servidor REST API |
+| MongoDB Atlas + Mongoose | Base de datos |
+| JWT | Autenticación stateless |
+| bcrypt | Hash de contraseñas |
+| Multer | Upload de imágenes |
+| CORS + Helmet | Seguridad HTTP |
+
+### Deploy
+| Servicio | Descripción |
+|---------|-------------|
+| Vercel | Frontend — deploy automático desde `main` |
+| Render | Backend — servidor Node.js en producción |
+| MongoDB Atlas | Base de datos en la nube |
 
 ---
 
-## Funcionalidades principales
+## 📁 Estructura del Proyecto
 
-- Registro y login de usuarios con verificación por token.  
-- Carrito de compras persistente en `localStorage`.  
-- Creación y visualización de órdenes de compra.  
-- Panel de administración con CRUD completo de productos y usuarios.  
-- Subida de imágenes y asignación de rutas locales o remotas.  
-- Validaciones de formulario y manejo de errores.  
-- Diseño totalmente responsive, adaptable a cualquier dispositivo.
-
----
-
-## Estructura del proyecto
-
-/frontend
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── styles/
-│ ├── services/
-│ └── assets/
-└── vite.config.js
-
-/backend
-├── controllers/
-├── models/
-├── routes/
-├── middlewares/
-├── server.js
-└── .env
-
-
+```
+neonbyte/
+├── frontend/
+│   ├── src/
+│   │   ├── components/        # Navbar, Footer, Header, ParticleBackground
+│   │   ├── pages/             # Home, Login, Register, Carrito, Admin...
+│   │   ├── styles/            # CSS por componente + global.css
+│   │   ├── services/          # api.js (Axios instance)
+│   │   ├── utils/             # auth.js, toast.js
+│   │   └── assets/            # Imágenes y recursos estáticos
+│   └── vite.config.js
+│
+└── backend/
+    ├── controllers/           # Lógica de negocio
+    ├── models/                # Schemas de Mongoose
+    ├── routes/                # Endpoints de la API
+    ├── middlewares/           # Auth JWT, validaciones
+    ├── server.js
+    └── .env                   # Variables de entorno (no incluido en repo)
+```
 
 ---
 
-## Instalación y ejecución local
+## ⚙️ Instalación Local
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/nicorodriguez23/neonbyte.git
+### Pre-requisitos
+- Node.js >= 18
+- MongoDB Atlas (cuenta gratuita) o MongoDB local
+- npm o yarn
 
+### 1 — Clonar el repositorio
+```bash
+git clone https://github.com/nicorodriguez23/neonbyte.git
+cd neonbyte
+```
 
-2. instalar dependencias:
-   cd neonbyte/backend
-   npm install
-   cd ../frontend
-   npm install
+### 2 — Configurar el Backend
+```bash
+cd backend
+npm install
+```
 
-3. configurar variables de entorno en el archivo .env:
-    MONGO_URI=tu_conexion_mongodb
-    JWT_SECRET=tu_clave
+Crear el archivo `.env`:
+```env
+MONGO_URI=tu_string_de_conexion_mongodb
+JWT_SECRET=una_clave_secreta_larga_y_segura
+PORT=5000
+```
 
-4. Levantar el backend:
-   cd backend
-   npm run dev o node index.js
+Iniciar el servidor:
+```bash
+npm run dev
+```
 
-5.  Levantar el frontend
-    cd../frontend
-    npm run dev   
+### 3 — Configurar el Frontend
+```bash
+cd ../frontend
+npm install
+```
 
+Crear el archivo `.env`:
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
 
+Iniciar el frontend:
+```bash
+npm run dev
+```
 
+### 4 — Abrir en el navegador
+```
+http://localhost:5173
+```
 
-NeonByte fue desarrollado como un proyecto integrador para poner en práctica todo lo aprendido en el área de desarrollo web full stack.
-Además de su objetivo académico, representa un punto de partida para futuros proyectos orientados al comercio electrónico, con foco en la experiencia de usuario y la escalabilidad.
+---
 
+## 🔑 Credenciales de Demo
+
+| Rol | Email | Contraseña |
+|-----|-------|-----------|
+| Admin | admin@neonbyte.com | admin123 |
+| Cliente | cliente@neonbyte.com | cliente123 |
+
+> ⚠️ Estas credenciales son solo para explorar el proyecto. No usar en producción.
+
+---
+
+## 🌐 API Endpoints
+
+### Usuarios
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/usuarios/login` | Iniciar sesión | ❌ |
+| POST | `/api/usuarios/register` | Registrar usuario | ❌ |
+| GET | `/api/usuarios/perfil` | Obtener perfil | ✅ |
+| GET | `/api/usuarios` | Listar usuarios | 🔐 Admin |
+| PUT | `/api/usuarios/:id` | Editar usuario | 🔐 Admin |
+| DELETE | `/api/usuarios/:id` | Eliminar usuario | 🔐 Admin |
+
+### Productos
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/productos` | Listar productos | ❌ |
+| GET | `/api/productos/:id` | Obtener producto | ❌ |
+| POST | `/api/productos` | Crear producto | 🔐 Admin |
+| PUT | `/api/productos/:id` | Editar producto | 🔐 Admin |
+| DELETE | `/api/productos/:id` | Eliminar producto | 🔐 Admin |
+
+### Órdenes
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/ordenes` | Crear orden | ✅ |
+| GET | `/api/ordenes/mis-ordenes` | Mis órdenes | ✅ |
+| GET | `/api/ordenes` | Todas las órdenes | 🔐 Admin |
+
+---
+
+## 🔮 Roadmap
+
+- [ ] Integración con pasarela de pagos real (MercadoPago / Stripe)
+- [ ] Sistema de reseñas y calificaciones de productos
+- [ ] Búsqueda y filtros avanzados en el catálogo
+- [ ] Upload de imágenes a Cloudinary en lugar de Multer local
+- [ ] Refresh token para sesiones más largas
+- [ ] Testing con Jest + React Testing Library
+- [ ] PWA — Progressive Web App
+
+---
+
+## 👨‍💻 Autor
+
+**Nicolás Rodriguez**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nicolás%20Rodriguez-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/tu-perfil)
+[![GitHub](https://img.shields.io/badge/GitHub-nicorodriguez23-181717?style=flat-square&logo=github)](https://github.com/nicorodriguez23)
+
+---
+
+<div align="center">
+
+**⚡ NeonByte — Tu destino gamer definitivo**
+
+_Desarrollado con 🎮 y mucho ☕_
+
+</div>
