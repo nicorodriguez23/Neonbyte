@@ -1,212 +1,214 @@
-* {
-  box-sizing: border-box;
+/* ── ADMIN PRODUCTOS ─────────────────────────────────────── */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+.admin-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .admin-header {
-  width: 100%;
-  min-height: 18vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   text-align: center;
-  padding: 24px 16px;
-  background: linear-gradient(180deg, rgba(0,255,204,0.10) 0%, rgba(15,15,15,1) 100%);
-  border-bottom: 2px solid #00ffcc33;
-  box-shadow: 0 0 25px rgba(0,255,204,0.15);
-  margin-bottom: 40px;
+  padding: 40px 24px 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  position: relative;
 }
-
+.admin-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent);
+}
 .admin-header h2 {
-  color: #00ffcc;
-  font-size: 2.4rem;
-  text-shadow: 0 0 12px #00ffcc;
-  margin: 0;
+  font-family: var(--font-display);
+  color: var(--cyan);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(0,245,255,0.4);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
 }
+.admin-header p { color: var(--text-dim); font-size: 0.9rem; }
 
-.admin-header p {
-  color: #bfeee8;
-  opacity: 0.9;
-  font-size: 1.05rem;
-  margin: 0;
-}
-
-.admin-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px 100px;
-  color: #e0e0e0;
-}
-
-/* FORM: grid responsivo */
+/* Formulario */
 .formulario {
-  background: rgba(26, 26, 26, 0.95);
-  border: 1px solid rgba(0,255,204,0.35);
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0,255,204,0.12);
-  padding: 24px;
-  margin: 0 auto 40px;
-  max-width: 980px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  margin-bottom: 32px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
-
+.formulario::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink), var(--green), var(--cyan));
+  background-size: 200% 100%;
+  animation: rgbBar 4s linear infinite;
+}
 .formulario input,
 .formulario select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 11px 14px;
   width: 100%;
-  background: #0f0f0f;
-  color: #fff;
-  border: 2px solid #333;
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 1rem;
-  transition: border-color .25s, box-shadow .25s;
+  min-width: 0;
+  transition: all var(--transition);
+  outline: none;
+  box-sizing: border-box;
 }
-
+.formulario input::placeholder { color: var(--text-dim); }
 .formulario input:focus,
 .formulario select:focus {
-  outline: none;
-  border-color: #00ffcc;
-  box-shadow: 0 0 10px rgba(0,255,204,0.4);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0,245,255,0.08);
 }
+.formulario select { cursor: pointer; }
+.formulario select option { background: var(--bg3); }
 
-.btn-crear {
-  background: #00ffcc;
-  color: #000;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  padding: 14px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: transform .2s, background .25s, box-shadow .25s;
-  box-shadow: 0 0 14px rgba(0,255,204,0.35);
+.btn-crear,
+.formulario button[type="submit"] {
   grid-column: 1 / -1;
-  justify-self: center;
-  max-width: 300px;
-  width: 100%;
-}
-
-.btn-crear:hover {
-  background: #00e6b8;
-  transform: translateY(-1px);
-}
-
-/* TABLA */
-.table-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  overflow-x: auto;
-  background: rgba(26,26,26,0.9);
-  border: 1px solid rgba(0,255,204,0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 22px rgba(0,255,204,0.12);
-}
-
-.productos-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 760px;
-}
-
-.productos-table thead th {
-  background: #0f0f0f;
-  color: #00ffcc;
-  text-align: left;
-  font-weight: 700;
-  padding: 14px 12px;
-  border-bottom: 1px solid rgba(0,255,204,0.25);
-}
-
-.productos-table tbody td {
-  padding: 12px;
-  border-bottom: 1px solid #2a2a2a;
-  vertical-align: top;
-}
-
-.imagen-cell { width: 80px; }
-
-.producto-imagen-mini {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  border: 1px solid rgba(0,255,204,0.35);
-  border-radius: 8px;
-  background: #0b0b0b;
-}
-
-.nombre-cell strong { color: #e9fffb; }
-.descripcion-mini { color: #a9b7b5; font-size: 0.9rem; margin-top: 4px; }
-.precio-cell { color: #fff; font-weight: 700; }
-
-.acciones-cell {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.btn-editar,
-.btn-eliminar {
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 700;
+  padding: 13px;
   border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--cyan), #00b8cc);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: transform .15s, box-shadow .2s, background .25s;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(0,245,255,0.2);
+  width: 100%;
 }
-
-.btn-editar {
-  background: #171f3b;
-  color: #b7c9ff;
-  border: 1px solid rgba(92,132,255,0.35);
-}
-
-.btn-editar:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(92,132,255,0.35);
-}
-
-.btn-eliminar {
-  background: #2b1416;
-  color: #ffc6c6;
-  border: 1px solid rgba(255,77,77,0.35);
-}
-
-.btn-eliminar:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(255,77,77,0.35);
+.btn-crear:hover,
+.formulario button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,245,255,0.35);
 }
 
 .toast-mensaje {
-  text-align: center;
-  background: #112725;
-  color: #b9fff1;
-  border: 1px solid #00ffcc66;
-  border-left: 4px solid #00ffcc;
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin: 20px auto;
-  width: fit-content;
-  box-shadow: 0 0 10px rgba(0,255,204,0.2);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+.toast-mensaje.success { background: rgba(0,255,136,0.1); border-left: 3px solid var(--green); color: var(--green); }
+.toast-mensaje.error   { background: rgba(255,45,120,0.1); border-left: 3px solid var(--pink);  color: var(--pink); }
+
+/* Tabla */
+.tabla-productos {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+}
+.tabla-productos .table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+.productos-table thead { background: var(--bg3); border-bottom: 1px solid var(--border-md); }
+.productos-table th {
+  font-family: var(--font-display);
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--cyan); padding: 14px 16px;
+  text-align: left; white-space: nowrap;
+}
+.productos-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid); font-size: 0.875rem;
+  vertical-align: middle;
+}
+.productos-table tbody tr:hover { background: rgba(0,245,255,0.03); }
+.productos-table tbody tr:last-child td { border-bottom: none; }
+
+.imagen-cell img,
+.producto-imagen-mini {
+  width: 52px; height: 52px;
+  object-fit: contain; border-radius: var(--radius-sm);
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 4px; display: block;
+}
+.nombre-cell strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 3px; }
+.descripcion-mini {
+  color: var(--text-dim); font-size: 0.78rem; margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+}
+.precio-cell { color: var(--cyan) !important; font-family: var(--font-display); font-weight: 700; }
+
+.acciones-cell { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.btn-editar {
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  background: transparent; border: 1.5px solid var(--cyan);
+  color: var(--cyan); font-family: var(--font-display);
+  font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  transition: all var(--transition); white-space: nowrap;
+}
+.btn-editar:hover { background: var(--cyan-dim); }
+.btn-eliminar {
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  background: rgba(255,45,120,0.1); border: 1.5px solid rgba(255,45,120,0.4);
+  color: var(--pink); font-family: var(--font-display);
+  font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  transition: all var(--transition); white-space: nowrap;
+}
+.btn-eliminar:hover { background: rgba(255,45,120,0.2); border-color: var(--pink); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .formulario { grid-template-columns: 1fr 1fr; }
 }
 
-/* Breakpoints */
-@media (max-width: 1024px) {
-  .formulario {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .admin-header h2 { font-size: 2.1rem; }
-}
+@media (max-width: 600px) {
+  .admin-container { padding: 0 12px 48px; }
+  .admin-header { padding: 24px 0 20px; }
 
-@media (max-width: 768px) {
   .formulario {
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 20px;
+    padding: 16px 12px;
+    gap: 10px;
   }
-  .admin-header h2 { font-size: 1.9rem; }
-  .admin-header p { font-size: 1rem; }
+
+  .tabla-productos { border-radius: var(--radius-md); }
+
+  .imagen-cell img,
+  .producto-imagen-mini { width: 38px; height: 38px; }
+
+  .descripcion-mini { display: none; }
+
+  .btn-editar, .btn-eliminar { padding: 5px 10px; font-size: 0.72rem; }
 }

@@ -1,15 +1,7 @@
 import axios from "axios";
 
 const ENV = (import.meta?.env?.VITE_API_BASE_URL || "").trim();
-let baseURL = ENV || "/api";
-
-if (typeof window !== "undefined") {
-  const host = window.location.hostname;
-  const isVercel = host.endsWith(".vercel.app");
-  if (isVercel && baseURL === "/api") {
-    baseURL = "https://neonbyte.onrender.com/api";
-  }
-}
+let baseURL = ENV || "https://neonbyte.onrender.com/api";
 
 console.log("API baseURL =>", baseURL);
 
@@ -24,11 +16,19 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (r) => r,
   (error) => {
-    if (error?.response?.status === 401) {
+    const status = error?.response?.status;
+    const url = error?.config?.url || "";
+
+    // Solo redirigir a login si el 401 viene de rutas de autenticación
+    // NO redirigir si viene de crear orden u otras rutas de negocio
+    const esRutaAuth = url.includes("/login") || url.includes("/perfil");
+
+    if (status === 401 && esRutaAuth) {
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
       window.location.href = "/login";
     }
+
     return Promise.reject(error);
   }
 );

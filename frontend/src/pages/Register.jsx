@@ -13,7 +13,7 @@ const Registro = () => {
     fechaNacimiento: "",
     provincia: "",
     observacion: "",
-    rol: "admin",
+    rol: "cliente",
   })
 
   const [errores, setErrores] = useState({})
@@ -21,10 +21,7 @@ const Registro = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const validarCampos = () => {
@@ -80,78 +77,67 @@ const Registro = () => {
 
   return (
     <>
-      <header>
-        <div className="header-content">
-          <h1>Registro de Usuario</h1>
-        </div>
-      </header>
+      {/* Header uniforme con el resto del sitio */}
+      <div className="page-hero">
+        <h1>Registro de Usuario</h1>
+        <p>Creá tu cuenta y unite a la comunidad NeonByte</p>
+      </div>
 
-      <div className="main-content">
-        <div className="form-container">
+      <div className="registro-wrapper">
+        <div className="registro-box">
           <form onSubmit={handleSubmit} className="form-register" noValidate>
+
             <div className="input-group">
               <label htmlFor="nombre">Nombre Completo*</label>
-              <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} />
+              <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Tu nombre completo" />
               {errores.nombre && <small className="error-text">{errores.nombre}</small>}
             </div>
 
             <div className="input-group">
               <label htmlFor="email">Correo Electrónico*</label>
-              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="correo@ejemplo.com" />
               {errores.email && <small className="error-text">{errores.email}</small>}
             </div>
 
-            <div className="input-group">
-              <label htmlFor="password">Contraseña*</label>
-              <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
-              {errores.password && <small className="error-text">{errores.password}</small>}
+            <div className="registro-grid">
+              <div className="input-group">
+                <label htmlFor="password">Contraseña*</label>
+                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" />
+                {errores.password && <small className="error-text">{errores.password}</small>}
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="confirmPassword">Repetir Contraseña*</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="••••••••" />
+                {errores.confirmPassword && <small className="error-text">{errores.confirmPassword}</small>}
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="fechaNacimiento">Fecha de Nacimiento*</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} />
+                {errores.fechaNacimiento && <small className="error-text">{errores.fechaNacimiento}</small>}
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="provincia">Provincia o País*</label>
+                <input type="text" id="provincia" name="provincia" value={formData.provincia} onChange={handleChange} placeholder="Buenos Aires, Argentina" />
+                {errores.provincia && <small className="error-text">{errores.provincia}</small>}
+              </div>
             </div>
 
             <div className="input-group">
-              <label htmlFor="confirmPassword">Repetir Contraseña*</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-              {errores.confirmPassword && <small className="error-text">{errores.confirmPassword}</small>}
+              <label htmlFor="observacion">Observación <span className="opcional">(opcional)</span></label>
+              <textarea id="observacion" name="observacion" rows={3} value={formData.observacion} onChange={handleChange} placeholder="Algún comentario adicional..." />
             </div>
 
-            <div className="input-group">
-              <label htmlFor="fechaNacimiento">Fecha de Nacimiento*</label>
-              <input
-                type="date"
-                id="fechaNacimiento"
-                name="fechaNacimiento"
-                value={formData.fechaNacimiento}
-                onChange={handleChange}
-              />
-              {errores.fechaNacimiento && <small className="error-text">{errores.fechaNacimiento}</small>}
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="provincia">Provincia o País*</label>
-              <input type="text" id="provincia" name="provincia" value={formData.provincia} onChange={handleChange} />
-              {errores.provincia && <small className="error-text">{errores.provincia}</small>}
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="observacion">Observación</label>
-              <textarea
-                id="observacion"
-                name="observacion"
-                rows={3}
-                value={formData.observacion}
-                onChange={handleChange}
-              />
-            </div>
-
-            <button type="submit">Registrar</button>
+            <button type="submit">Crear cuenta</button>
           </form>
 
-          {mensaje && <div className="toast-mensaje">✔ {mensaje}</div>}
+          {mensaje && (
+            <div className={`toast-mensaje ${mensaje.includes("error") ? "error" : ""}`}>
+              {mensaje.includes("error") ? "✖" : "✔"} {mensaje}
+            </div>
+          )}
         </div>
       </div>
     </>

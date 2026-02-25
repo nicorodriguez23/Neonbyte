@@ -1,12 +1,12 @@
 "use client";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "./components/Header";
 import Navbar from "./components/navbar.jsx";
 import Footer from "./components/Footer";
-
+import ParticleBackground from "./components/ParticleBackground";
 
 import Home from "./pages/Home";
 import Contacto from "./pages/Contacto";
@@ -14,21 +14,19 @@ import Register from "./pages/Register";
 import Acerca from "./pages/Acerca";
 import Login from "./pages/Login";
 import Carrito from "./pages/Carrito";
-
 import DetalleProducto from "./pages/DetallesProductos/DetalleProducto";
 import CrearOrden from "./pages/crearOrden";
 import Pago from "./pages/Pago.jsx";
-
 import AdminProductos from "./pages/AdminProductos";
 import AdminUsuarios from "./pages/AdminUsuarios";
 
 import "./styles/global.css";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+const INACTIVITY_LIMIT = 10 * 60 * 1000; // 10 minutos
 
+function App() {
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem("carrito");
     return guardado ? JSON.parse(guardado) : [];
@@ -51,11 +49,34 @@ function App() {
     }
   }, [usuario]);
 
-  const cerrarSesion = () => {
+  const cerrarSesion = useCallback(() => {
     setUsuario(null);
     localStorage.removeItem("usuario");
+    localStorage.removeItem("token");
     window.location.href = "/";
-  };
+  }, []);
+
+  // ── Auto-logout por inactividad (solo si hay sesión activa) ──
+  useEffect(() => {
+    if (!usuario) return; // no correr si no hay sesión
+
+    let timer;
+    const resetTimer = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        cerrarSesion();
+      }, INACTIVITY_LIMIT);
+    };
+
+    const eventos = ["mousemove", "keydown", "click", "scroll", "touchstart"];
+    eventos.forEach((ev) => window.addEventListener(ev, resetTimer));
+    resetTimer(); // iniciar al montar
+
+    return () => {
+      clearTimeout(timer);
+      eventos.forEach((ev) => window.removeEventListener(ev, resetTimer));
+    };
+  }, [usuario, cerrarSesion]);
 
   const total = carrito.reduce(
     (acc, item) => acc + item.precio * item.cantidad,
@@ -64,6 +85,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* Fondo de partículas animadas — detrás de todo */}
+      <ParticleBackground />
+
       <Header />
 
       <Navbar
@@ -73,75 +97,36 @@ function App() {
         cerrarSesion={cerrarSesion}
       />
 
-      {/* Rutas */}
       <Routes>
         <Route
           path="/"
-          element={
-            <Home
-              carrito={carrito}
-              setCarrito={setCarrito}
-              usuario={usuario}
-            />
-          }
+          element={<Home carrito={carrito} setCarrito={setCarrito} usuario={usuario} />}
         />
-
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/register" element={<Register />} />
         <Route path="/acerca" element={<Acerca />} />
-
         <Route
           path="/admin-productos"
-          element={
-            <AdminProductos carrito={carrito} setCarrito={setCarrito} />
-          }
+          element={<AdminProductos carrito={carrito} setCarrito={setCarrito} />}
         />
         <Route path="/admin-usuarios" element={<AdminUsuarios />} />
-
         <Route
           path="/producto/:id"
-          element={
-            <DetalleProducto
-              carrito={carrito}
-              setCarrito={setCarrito}
-            />
-          }
+          element={<DetalleProducto carrito={carrito} setCarrito={setCarrito} />}
         />
-
         <Route
           path="/carrito"
-          element={
-            <Carrito carrito={carrito} setCarrito={setCarrito} />
-          }
+          element={<Carrito carrito={carrito} setCarrito={setCarrito} />}
         />
-
         <Route
           path="/crear-orden"
-          element={
-            <CrearOrden
-              carrito={carrito}
-              setCarrito={setCarrito}
-              usuario={usuario}
-            />
-          }
+          element={<CrearOrden carrito={carrito} setCarrito={setCarrito} usuario={usuario} />}
         />
-
         <Route
           path="/pago"
-          element={
-            <Pago
-              carrito={carrito}
-              total={total}
-              usuario={usuario}
-              setCarrito={setCarrito}
-            />
-          }
+          element={<Pago carrito={carrito} total={total} usuario={usuario} setCarrito={setCarrito} />}
         />
-
-        <Route
-          path="/login"
-          element={<Login setUsuario={setUsuario} />}
-        />
+        <Route path="/login" element={<Login setUsuario={setUsuario} />} />
       </Routes>
 
       <Footer />

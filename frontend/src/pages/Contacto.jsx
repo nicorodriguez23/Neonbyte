@@ -1,32 +1,29 @@
 import "../styles/contacto.css";
 
-
 export default function Contacto() {
   return (
     <>
-      <header className="header">
-        <div className="header-content">
-          
-          <h1 className="titulo-contacto">¡Contactate con nosotros!</h1>
-        </div>
-      </header>
+      <div className="page-hero">
+        <h1>¡Contáctanos!</h1>
+        <p>Estamos para ayudarte — escribinos y te respondemos a la brevedad</p>
+      </div>
 
       <main className="contact-container">
         <div className="form-container">
           <form className="contact-form" action="#" method="POST">
             <div className="input-group">
               <label htmlFor="nombre">Nombre Completo*</label>
-              <input type="text" id="nombre" name="nombre" required />
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
             </div>
 
             <div className="input-group">
               <label htmlFor="email">Correo Electrónico*</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required />
             </div>
 
             <div className="input-group">
               <label htmlFor="mensaje">Mensaje*</label>
-              <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+              <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
             </div>
 
             <button type="submit">Enviar Mensaje</button>
@@ -47,8 +44,6 @@ export default function Contacto() {
           ></iframe>
         </div>
       </main>
-
-      
     </>
   );
 }
