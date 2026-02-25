@@ -4,17 +4,24 @@ const productoController = require("../controllers/productoController");
 const { verifyToken, verifyAdmin } = require("../middlewares/auth");
 const uploadProducto = require("../middlewares/uploadProducto");
 
-router.put("/cargar-especificaciones", productoController.cargarEspecificaciones);
-
+// ─── Rutas públicas ────────────────────────────────────────────────────────────
 router.get("/", productoController.obtenerProductos);
 router.get("/:id", productoController.obtenerProductoPorId);
 
+// ─── Rutas admin ───────────────────────────────────────────────────────────────
 router.post(
   "/",
   verifyToken,
   verifyAdmin,
   uploadProducto.single("imagen"),
   productoController.crearProducto
+);
+
+router.put(
+  "/cargar-especificaciones",
+  verifyToken,
+  verifyAdmin,
+  productoController.cargarEspecificaciones
 );
 
 router.put(
