@@ -2,24 +2,22 @@
 
 <div align="center">
 
-![NeonByte Banner](https://img.shields.io/badge/NeonByte-Gaming%20E--Commerce-00f5ff?style=for-the-badge&logo=react&logoColor=white)
+![NeonByte Banner](https://img.shields.io/badge/NeonByte-Gaming%20E--Commerce-0a0f1a?style=for-the-badge&logo=react&logoColor=00f5ff)
 
 **E-commerce full stack de componentes y periféricos gamer**
 
-[![Deploy Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=flat-square&logo=vercel)](https://neonbyte.vercel.app)
+[![Deploy Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=flat-square&logo=vercel)](https://neonbyte-one.vercel.app)
 [![Deploy Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat-square&logo=render)](https://neonbyte.onrender.com)
 [![Stack](https://img.shields.io/badge/Stack-MERN-00f5ff?style=flat-square)](https://github.com/nicorodriguez23/neonbyte)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[🌐 Ver Demo en Vivo](https://neonbyte.vercel.app) · [🐛 Reportar Bug](https://github.com/nicorodriguez23/neonbyte/issues) · [💡 Sugerir Feature](https://github.com/nicorodriguez23/neonbyte/issues)
+[🌐 Ver Demo en Vivo](https://neonbyte-one.vercel.app) · [🐛 Reportar Bug](https://github.com/nicorodriguez23/neonbyte/issues) · [💡 Sugerir Feature](https://github.com/nicorodriguez23/neonbyte/issues)
 
 </div>
 
 ---
 
 ## 📸 Preview
-
-> _Capturas del proyecto en acción — desktop y mobile_
 
 | Home | Admin Panel | Detalle Producto |
 |------|-------------|-----------------|
@@ -226,7 +224,7 @@ http://localhost:5173
 
 **Nicolás Rodriguez**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nicolás%20Rodriguez-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/tu-perfil)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nicolás%20Rodriguez-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/nicolas-rodriguez-tech)
 [![GitHub](https://img.shields.io/badge/GitHub-nicorodriguez23-181717?style=flat-square&logo=github)](https://github.com/nicorodriguez23)
 
 ---
