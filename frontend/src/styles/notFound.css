@@ -1,0 +1,199 @@
+/* ── NOT FOUND 404 ───────────────────────────────────────── */
+
+.notfound-container {
+  min-height: calc(100vh - var(--navbar-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  z-index: 1;
+}
+
+/* ── Número 404 con efecto glitch ── */
+.notfound-glitch-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.notfound-code {
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 20vw, 14rem);
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--cyan);
+  text-shadow:
+    0 0 20px rgba(0, 245, 255, 0.3),
+    0 0 60px rgba(0, 245, 255, 0.1);
+  position: relative;
+  animation: glitchMain 4s infinite;
+}
+
+/* Capas del glitch */
+.notfound-code::before,
+.notfound-code::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-family: var(--font-display);
+  font-size: inherit;
+  font-weight: 900;
+  letter-spacing: -4px;
+  -webkit-text-stroke: 2px transparent;
+}
+
+.notfound-code::before {
+  color: var(--pink);
+  animation: glitchTop 4s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  opacity: 0;
+}
+
+.notfound-code::after {
+  color: var(--cyan);
+  animation: glitchBottom 4s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  opacity: 0;
+}
+
+@keyframes glitchMain {
+  0%, 90%, 100% { transform: translate(0); }
+  91%            { transform: translate(-3px, 1px); }
+  93%            { transform: translate(3px, -1px); }
+  95%            { transform: translate(-2px, 2px); }
+  97%            { transform: translate(0); }
+}
+
+@keyframes glitchTop {
+  0%, 89%, 100% { opacity: 0; transform: translate(0); }
+  90%           { opacity: 0.8; transform: translate(-4px, -2px); }
+  92%           { opacity: 0.8; transform: translate(4px, 1px); }
+  94%           { opacity: 0; }
+}
+
+@keyframes glitchBottom {
+  0%, 91%, 100% { opacity: 0; transform: translate(0); }
+  92%           { opacity: 0.6; transform: translate(4px, 2px); }
+  94%           { opacity: 0.6; transform: translate(-4px, -1px); }
+  96%           { opacity: 0; }
+}
+
+/* ── Contenido ── */
+.notfound-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 480px;
+}
+
+.notfound-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--pink);
+  text-shadow: 0 0 20px rgba(255, 45, 120, 0.4);
+  margin: 0;
+}
+
+.notfound-desc {
+  color: var(--text-mid);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Botones ── */
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.notfound-btn-primary {
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--cyan), #00b8cc);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(0, 245, 255, 0.25);
+}
+
+.notfound-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 245, 255, 0.4);
+}
+
+.notfound-btn-secondary {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1.5px solid var(--border-md);
+  color: var(--text-mid);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.notfound-btn-secondary:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  transform: translateY(-3px);
+}
+
+/* ── Líneas decorativas ── */
+.notfound-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.notfound-lines span {
+  position: absolute;
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  animation: scanLine 6s linear infinite;
+}
+
+.notfound-lines span:nth-child(1) { width: 60%; left: 20%; animation-delay: 0s; }
+.notfound-lines span:nth-child(2) { width: 40%; left: 30%; animation-delay: 2s; background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+.notfound-lines span:nth-child(3) { width: 50%; left: 25%; animation-delay: 4s; }
+
+@keyframes scanLine {
+  0%   { top: -2px; opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .notfound-actions { flex-direction: column; width: 100%; max-width: 280px; }
+  .notfound-btn-primary,
+  .notfound-btn-secondary { width: 100%; }
+}

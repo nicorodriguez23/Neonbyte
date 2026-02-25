@@ -19,12 +19,13 @@ import CrearOrden from "./pages/crearOrden";
 import Pago from "./pages/Pago.jsx";
 import AdminProductos from "./pages/AdminProductos";
 import AdminUsuarios from "./pages/AdminUsuarios";
+import NotFound from "./pages/NotFound";
 
 import "./styles/global.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const INACTIVITY_LIMIT = 10 * 60 * 1000; // 10 minutos
+const INACTIVITY_LIMIT = 10 * 60 * 1000;
 
 function App() {
   const [carrito, setCarrito] = useState(() => {
@@ -56,22 +57,16 @@ function App() {
     window.location.href = "/";
   }, []);
 
-  // ── Auto-logout por inactividad (solo si hay sesión activa) ──
   useEffect(() => {
-    if (!usuario) return; // no correr si no hay sesión
-
+    if (!usuario) return;
     let timer;
     const resetTimer = () => {
       clearTimeout(timer);
-      timer = setTimeout(() => {
-        cerrarSesion();
-      }, INACTIVITY_LIMIT);
+      timer = setTimeout(() => cerrarSesion(), INACTIVITY_LIMIT);
     };
-
     const eventos = ["mousemove", "keydown", "click", "scroll", "touchstart"];
     eventos.forEach((ev) => window.addEventListener(ev, resetTimer));
-    resetTimer(); // iniciar al montar
-
+    resetTimer();
     return () => {
       clearTimeout(timer);
       eventos.forEach((ev) => window.removeEventListener(ev, resetTimer));
@@ -79,17 +74,13 @@ function App() {
   }, [usuario, cerrarSesion]);
 
   const total = carrito.reduce(
-    (acc, item) => acc + item.precio * item.cantidad,
-    0
+    (acc, item) => acc + item.precio * item.cantidad, 0
   );
 
   return (
     <BrowserRouter>
-      {/* Fondo de partículas animadas — detrás de todo */}
       <ParticleBackground />
-
       <Header />
-
       <Navbar
         carrito={carrito}
         setCarrito={setCarrito}
@@ -98,35 +89,19 @@ function App() {
       />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home carrito={carrito} setCarrito={setCarrito} usuario={usuario} />}
-        />
+        <Route path="/" element={<Home carrito={carrito} setCarrito={setCarrito} usuario={usuario} />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/register" element={<Register />} />
         <Route path="/acerca" element={<Acerca />} />
-        <Route
-          path="/admin-productos"
-          element={<AdminProductos carrito={carrito} setCarrito={setCarrito} />}
-        />
+        <Route path="/admin-productos" element={<AdminProductos carrito={carrito} setCarrito={setCarrito} />} />
         <Route path="/admin-usuarios" element={<AdminUsuarios />} />
-        <Route
-          path="/producto/:id"
-          element={<DetalleProducto carrito={carrito} setCarrito={setCarrito} />}
-        />
-        <Route
-          path="/carrito"
-          element={<Carrito carrito={carrito} setCarrito={setCarrito} />}
-        />
-        <Route
-          path="/crear-orden"
-          element={<CrearOrden carrito={carrito} setCarrito={setCarrito} usuario={usuario} />}
-        />
-        <Route
-          path="/pago"
-          element={<Pago carrito={carrito} total={total} usuario={usuario} setCarrito={setCarrito} />}
-        />
+        <Route path="/producto/:id" element={<DetalleProducto carrito={carrito} setCarrito={setCarrito} />} />
+        <Route path="/carrito" element={<Carrito carrito={carrito} setCarrito={setCarrito} />} />
+        <Route path="/crear-orden" element={<CrearOrden carrito={carrito} setCarrito={setCarrito} usuario={usuario} />} />
+        <Route path="/pago" element={<Pago carrito={carrito} total={total} usuario={usuario} setCarrito={setCarrito} />} />
         <Route path="/login" element={<Login setUsuario={setUsuario} />} />
+        {/* Ruta 404 — debe ir siempre al final */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
