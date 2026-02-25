@@ -2,14 +2,11 @@
 
 <div align="center">
 
-![NeonByte Banner](https://img.shields.io/badge/NeonByte-Gaming%20E--Commerce-0a0f1a?style=for-the-badge&logo=react&logoColor=00f5ff)
-
 **E-commerce full stack de componentes y periféricos gamer**
 
-[![Deploy Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=flat-square&logo=vercel)](https://neonbyte-one.vercel.app)
-[![Deploy Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat-square&logo=render)](https://neonbyte.onrender.com)
-[![Stack](https://img.shields.io/badge/Stack-MERN-00f5ff?style=flat-square)](https://github.com/nicorodriguez23/neonbyte)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Deploy](https://img.shields.io/badge/Deploy-Live-brightgreen?style=flat-square&logo=vercel&logoColor=white)](https://neonbyte-one.vercel.app)
+[![Stack](https://img.shields.io/badge/Stack-MERN-555?style=flat-square)](https://github.com/nicorodriguez23/neonbyte)
+[![License](https://img.shields.io/badge/License-MIT-555?style=flat-square)](LICENSE)
 
 [🌐 Ver Demo en Vivo](https://neonbyte-one.vercel.app) · [🐛 Reportar Bug](https://github.com/nicorodriguez23/neonbyte/issues) · [💡 Sugerir Feature](https://github.com/nicorodriguez23/neonbyte/issues)
 
@@ -21,7 +18,7 @@
 
 | Home | Admin Panel | Detalle Producto |
 |------|-------------|-----------------|
-| ![Home](./screenshots/home.png) | ![Admin](./screenshots/admin.png) | ![Detalle](./screenshots/detalle.png) |
+| ![Home](./frontend/screenshots/home.png) | ![Admin](./frontend/screenshots/admin.png) | ![Detalle](./frontend/screenshots/detalle.png) |
 
 ---
 
@@ -139,7 +136,6 @@ JWT_SECRET=una_clave_secreta_larga_y_segura
 PORT=5000
 ```
 
-Iniciar el servidor:
 ```bash
 npm run dev
 ```
@@ -155,15 +151,11 @@ Crear el archivo `.env`:
 VITE_API_BASE_URL=http://localhost:5000/api
 ```
 
-Iniciar el frontend:
 ```bash
 npm run dev
 ```
 
-### 4 — Abrir en el navegador
-```
-http://localhost:5173
-```
+Abrir en: `http://localhost:5173`
 
 ---
 
@@ -174,7 +166,7 @@ http://localhost:5173
 | Admin | admin@neonbyte.com | admin123 |
 | Cliente | cliente@neonbyte.com | cliente123 |
 
-> ⚠️ Estas credenciales son solo para explorar el proyecto. No usar en producción.
+> ⚠️ Solo para explorar el proyecto.
 
 ---
 
@@ -210,11 +202,11 @@ http://localhost:5173
 
 ## 🔮 Roadmap
 
-- [ ] Integración con pasarela de pagos real (MercadoPago / Stripe)
-- [ ] Sistema de reseñas y calificaciones de productos
-- [ ] Búsqueda y filtros avanzados en el catálogo
-- [ ] Upload de imágenes a Cloudinary en lugar de Multer local
-- [ ] Refresh token para sesiones más largas
+- [ ] Integración con MercadoPago / Stripe
+- [ ] Sistema de reseñas y calificaciones
+- [ ] Búsqueda y filtros avanzados
+- [ ] Upload de imágenes a Cloudinary
+- [ ] Refresh token para sesiones largas
 - [ ] Testing con Jest + React Testing Library
 - [ ] PWA — Progressive Web App
 
